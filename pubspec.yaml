@@ -1,0 +1,9 @@
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+flutter:
+  assets:
+    - assets/spring.png
+    - assets/summer.png
+    - assets/autumn.png
+    - assets/winter.png
