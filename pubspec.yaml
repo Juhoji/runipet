@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 name: runipet
 description: A Flutter project to raise a pet by walking!
 
@@ -21,14 +20,3 @@ flutter:
     - assets/profile_male.png
     - assets/profile_female.png
     - assets/dog.png
-=======
-environment:
-  sdk: ">=3.0.0 <4.0.0"
-
-flutter:
-  assets:
-    - assets/spring.png
-    - assets/summer.png
-    - assets/autumn.png
-    - assets/winter.png
->>>>>>> 348b71bd2384451461fb455467f1fa5166ee8a19
