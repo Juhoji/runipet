@@ -61,6 +61,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               const Align(alignment: Alignment.centerLeft, child: Text("동물 이름")),
               TextField(
                 controller: _petNameController,
+                onChanged: (_) => setState(() {}), // 실시간 업데이트
                 decoration: const InputDecoration(border: OutlineInputBorder()),
               ),
 
