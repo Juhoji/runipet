@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'edit_profile_page.dart';
-=======
-import 'dart:ui';
->>>>>>> 348b71bd2384451461fb455467f1fa5166ee8a19
 
 void main() {
   runApp(const LoonyPetApp());
@@ -15,19 +11,12 @@ class LoonyPetApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-<<<<<<< HEAD
       debugShowCheckedModeBanner: false,
       home: MainPage(),
-=======
-      title: '루니펫',
-      theme: ThemeData(useMaterial3: true),
-      home: const HomeScreen(),
->>>>>>> 348b71bd2384451461fb455467f1fa5166ee8a19
     );
   }
 }
 
-<<<<<<< HEAD
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
@@ -41,33 +30,10 @@ class MainPage extends StatelessWidget {
       if (month >= 9 && month <= 11) return 'assets/autumn.png';  // 가을
       return 'assets/winter.png';                                 // 겨울
     })();
-=======
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  String _getSeasonAsset() {
-    final month = DateTime.now().month;
-
-    if (month >= 3 && month <= 5) {
-      return 'assets/spring.png'; // 봄
-    } else if (month >= 6 && month <= 8) {
-      return 'assets/summer.png'; // 여름
-    } else if (month >= 9 && month <= 11) {
-      return 'assets/autumn.png'; // 가을
-    } else {
-      return 'assets/winter.png'; // 겨울
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final backgroundImage = _getSeasonAsset();
->>>>>>> 348b71bd2384451461fb455467f1fa5166ee8a19
 
     return Scaffold(
       body: Stack(
         children: [
-<<<<<<< HEAD
           // 🌸 계절 배경 이미지
           Positioned.fill(
             child: Image.asset(seasonBackground, fit: BoxFit.cover),
@@ -164,101 +130,12 @@ class HomeScreen extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.store), label: "상점"),
           BottomNavigationBarItem(icon: Icon(Icons.people), label: "소셜"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "설정"),
-=======
-          // 배경 계절 이미지
-          Positioned.fill(
-            child: Image.asset(
-              backgroundImage,
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // 메인 UI
-          SafeArea(
-            child: Column(
-              children: [
-                // 상단: 프로필 이미지
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => const ProfilePage()),
-                          );
-                        },
-                        child: const CircleAvatar(
-                          radius: 24,
-                          backgroundImage: AssetImage('assets/user.png'),
-                        ),
-                      ),
-                      // 오른쪽 공백
-                      const SizedBox(width: 40),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 40),
-
-                // 중앙 캐릭터와 빠른 시작
-                Column(
-                  children: [
-                    Image.asset('assets/character.png', height: 100),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "최고 웨이브 20",
-                      style: TextStyle(fontSize: 14, color: Colors.black87),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        // 운동 시작 기능
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow[700],
-                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                      child: const Text(
-                        "빠른 시작!",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-
-                const Spacer(),
-
-                // 하단 탭
-                Container(
-                  color: Colors.white.withOpacity(0.9),
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      TabItem(icon: Icons.home, label: "홈"),
-                      TabItem(icon: Icons.pets, label: "가상동물"),
-                      TabItem(icon: Icons.group, label: "친구"),
-                      TabItem(icon: Icons.settings, label: "설정"),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
->>>>>>> 348b71bd2384451461fb455467f1fa5166ee8a19
         ],
       ),
     );
   }
 }
 
-<<<<<<< HEAD
 // 🧩 커스텀 버튼 위젯
 class _ActionButton extends StatelessWidget {
   final String text;
@@ -278,58 +155,6 @@ class _ActionButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       child: Text(text, style: const TextStyle(color: Colors.white)),
-=======
-class TabItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-
-  const TabItem({super.key, required this.icon, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, color: Colors.grey[800]),
-        const SizedBox(height: 4),
-        Text(label, style: const TextStyle(fontSize: 12)),
-      ],
->>>>>>> 348b71bd2384451461fb455467f1fa5166ee8a19
     );
   }
 }
-
-<<<<<<< HEAD
-=======
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("내 프로필"),
-        backgroundColor: Colors.green[300],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('assets/user.png'),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "머모오너죠",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Text("최고 웨이브: 20", style: TextStyle(color: Colors.grey)),
-          ],
-        ),
-      ),
-    );
-  }
-}
->>>>>>> 348b71bd2384451461fb455467f1fa5166ee8a19
