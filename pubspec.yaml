@@ -1,0 +1,22 @@
+name: runipet
+description: A Flutter project to raise a pet by walking!
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  image_picker: ^1.0.4 # 최신 버전 또는 stable 버전 사용
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/spring.png
+    - assets/summer.png
+    - assets/fall.png
+    - assets/winter.png
+    - assets/profile_male.png
+    - assets/profile_female.png
+    - assets/dog.png
