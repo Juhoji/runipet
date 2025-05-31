@@ -3,7 +3,9 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+  final Function(String)? onGenderChanged; // 콜백 전달 가능하도록
+
+  const EditProfilePage({super.key, this.onGenderChanged});
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -11,6 +13,8 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   File? _profileImage;
+  String _selectedGender = 'male'; // 기본값 남성
+
   final TextEditingController _nicknameController = TextEditingController(text: '러너');
   final TextEditingController _petNameController = TextEditingController(text: '누룽이');
   final TextEditingController _todayStepsController = TextEditingController();
@@ -18,7 +22,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Future<void> _pickImage() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-
     if (pickedFile != null) {
       setState(() {
         _profileImage = File(pickedFile.path);
@@ -26,8 +29,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
+  void _updateGender(String value) {
+    setState(() {
+      _selectedGender = value;
+    });
+    if (widget.onGenderChanged != null) {
+      widget.onGenderChanged!(value); // 부모에게 알려주기
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final genderAssetPath = 'assets/profile_${_selectedGender}.png';
+
     return Scaffold(
       appBar: AppBar(title: const Text("프로필")),
       body: SingleChildScrollView(
@@ -40,12 +54,32 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 radius: 50,
                 backgroundImage: _profileImage != null
                     ? FileImage(_profileImage!)
-                    : const AssetImage('assets/profile.png') as ImageProvider,
+                    : AssetImage(genderAssetPath) as ImageProvider,
               ),
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: _pickImage,
                 child: const Text("프로필 이미지 변경"),
+              ),
+
+              // 🧑 성별 선택
+              const SizedBox(height: 20),
+              const Align(alignment: Alignment.centerLeft, child: Text("성별")),
+              ListTile(
+                title: const Text("남성"),
+                leading: Radio<String>(
+                  value: 'male',
+                  groupValue: _selectedGender,
+                  onChanged: _updateGender,
+                ),
+              ),
+              ListTile(
+                title: const Text("여성"),
+                leading: Radio<String>(
+                  value: 'female',
+                  groupValue: _selectedGender,
+                  onChanged: _updateGender,
+                ),
               ),
 
               // 🧑 닉네임 입력
@@ -61,7 +95,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               const Align(alignment: Alignment.centerLeft, child: Text("동물 이름")),
               TextField(
                 controller: _petNameController,
-                onChanged: (_) => setState(() {}), // 실시간 업데이트
+                onChanged: (_) => setState(() {}),
                 decoration: const InputDecoration(border: OutlineInputBorder()),
               ),
 
@@ -86,16 +120,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           TextField(
                             controller: _todayStepsController,
                             keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              labelText: "오늘 걸음 수",
-                            ),
+                            decoration: const InputDecoration(labelText: "오늘 걸음 수"),
                           ),
                           TextField(
                             controller: _goalStepsController,
                             keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              labelText: "목표 걸음 수",
-                            ),
+                            decoration: const InputDecoration(labelText: "목표 걸음 수"),
                           ),
                         ],
                       ),
@@ -107,7 +137,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
-                  // TODO: 저장 로직 추가
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("프로필이 저장되었습니다")),
                   );
